@@ -1,0 +1,215 @@
+\ProvidesPackage{config}[2012/07/03]
+%% ---------------------------------------------------------------------------- 
+
+% fast immer benoetigte Pakete
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[fleqn]{amsmath}
+
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{alltt}
+\usepackage{latexsym}
+\usepackage{makeidx}
+\usepackage{textcomp}
+\usepackage{rotating}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage[nonumberlist]{glossaries}
+
+% Auf Schriftart Palatino umschalten
+\usepackage{mathpazo}
+\usepackage[scaled=.95]{helvet}
+\usepackage{courier}
+
+% Hyperlinks
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+]{hyperref}
+
+% Listings
+\usepackage{listings}
+
+% ------------------------------------------------- Allgemeine Formatanweisungen
+% Der Textanteil einer Seite. Der Default
+% ist $0.2$. Er wird auf $0.001$ gesetzt.
+\renewcommand{\textfraction}{0.001}
+
+% Eine Abbildung muss mindestens einen Anteil |\floatpagefraction| 
+% einer Seite haben, um auf eine eigene leere Seite gesetzt zu 
+% werden. Der Default dafür ist $0.5$. Er wird hier auf $0.99$ gesetzt.
+\renewcommand{\floatpagefraction}{.99}
+
+\setlength{\parskip}{4pt plus 4pt} % Einzug am Begin des Absatzes
+\parindent 0pt                     % verzichte auf Einrücken der ersten Zeile
+\raggedbottom                      % kein vertikaler Randausgleich nach unten
+\widowpenalty=10000                % Schusterjungen und Hurenkinder möglichst
+\clubpenalty=10000                 % ausschließen
+\sloppy                            % Anzahl der Warnungen reduzieren
+
+% Eigene Definitionen fuer Kopf- und Fusszeilen
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection\quad #1}{}}
+\fancyhf{}
+\fancyhead[RO]{\thepage}
+\fancyhead[LO]{\nouppercase \leftmark}
+\fancyfoot{}
+\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}  
+
+% Kapitelzahl gross, Kapitelueberschrift Huge,Helvetica
+% (nicht so TeX-Standard-Like)
+\def \@makechapterhead#1{
+  \vspace*{40\p@}
+  {\parindent \z@
+  \raggedright
+  \reset@font\sffamily
+%      \LARGE \bfseries \@chapapp{} \thechapter% "Normale" Überschrift
+      \flushright \fontsize{50}{52} \selectfont \thechapter
+      \par
+      \vskip 20\p@
+  \sffamily \Huge \bfseries #1
+  \par
+  \nobreak
+  \vskip 40\p@
+  }
+}
+
+% Kapitelzahl gross, Kapitelueberschrift Huge,Helvetica
+% (nicht so TeX-Standard-Like)
+\def \@makeschapterhead#1{
+  \vspace*{40\p@}
+  {\parindent \z@
+  \raggedright
+  \reset@font\sffamily
+      \par
+      \vskip 20\p@
+  \flushright \sffamily \Huge \bfseries #1
+  \par
+  \nobreak
+  \vskip 40\p@
+  }
+}
+
+% \subsection usw. anpassen, Helvetica fett
+\renewcommand\section{\@startsection {section}{1}{0mm}
+                {6mm}
+                {2.8mm}
+                {\sffamily\raggedright\Large\bfseries}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}
+                {4mm}
+                {1.3mm}
+                {\normalfont\sffamily\large\bfseries}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}
+                {4mm}
+                {0.8mm}
+                {\normalfont\sffamily\normalsize\bfseries}}
+
+% Trennung auch bei tt-Schrift (laut de-tex-faq)
+\newcommand{\origttfamily}{} % sollte noch nicht definiert sein!
+\let\origttfamily=\ttfamily  % alte Definition von \ttfamily sichern
+\renewcommand{\ttfamily}{\origttfamily \hyphenchar\font=`\-}
+
+% ------------------------------------------------ leere Seite zwischen Kapiteln
+% \clearpage bzw. \cleardoublepage
+% falls letzte Seite eines Kapitels leer ist 
+% (also gerade Seitennummer), keine Kopf- und Fußzeile
+\newcommand{\leereseite}{
+\hbox{} \ifodd \thepage {\newpage\thispagestyle{empty}} \fi}
+
+% ------------------------------------------------------- Aufzählung mit bullets
+% neue Definition fuer Listenumgebungen
+% linken Einzug definieren
+\setlength\leftmargini     {1.25em}
+\setlength\leftmarginii    {1.75em}
+\setlength\leftmarginiii   {1.50em}
+\setlength\leftmarginiv    {1.25em}
+% kleines Kaestchen als erstes Aufzaehlungszeichen, 
+% Bullet als zweite, kleiner Kreis als drittes, Minus als viertes
+\renewcommand{\labelitemi}{\addtolength{\leftmargini}{-0.25em}\textcolor[gray]{0.5}{\rule{1.0ex}{1.0ex}}}
+\renewcommand{\labelitemii}{\textbullet}
+\renewcommand{\labelitemiii}{\textopenbullet}
+\renewcommand{\labelitemiv}{\textminus}
+
+% ----------------------------------------------------------------- Nummerierung
+% Abbildung: Kapitelnummer.Abbildungsnummer
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+\@addtoreset{figure}{section}
+% Tabelle: Kapitelnummer.Tabellennummer
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\@addtoreset{table}{section}
+% Listing: Kpitelnummer.Listingnummer
+\makeatletter
+\AtBeginDocument{%
+\renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+\@addtoreset{lstlisting}{section}}
+\makeatother
+
+% --------------------------------------------------------------------- Listings
+\lstset{
+	basicstyle=\footnotesize\ttfamily, % Standardschrift
+	numbers=left,                      % Ort der Zeilennummern
+	numberstyle=\tiny,                 % Stil der Zeilennummern
+	numbersep=5pt,                     % Abstand der Nummern zum Text
+	tabsize=2,                         % Groesse von Tabs
+	extendedchars=true,
+	breaklines=true,                   % Zeilen werden Umgebrochen
+	stringstyle=\ttfamily,             % Farbe der String
+	showspaces=false,                  % Leerzeichen anzeigen ?
+	showtabs=false,                    % Tabs anzeigen ?
+	xleftmargin=17pt,
+	frame=b,                           % Begrenzung unten
+	showstringspaces=false             % Leerzeichen in Strings anzeigen ?
+}
+\lstloadlanguages{C}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35,
+0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white,
+singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+% ---------------------------------------------------------------- Tastensymbole
+% Der Texte wird als Taste umrandet
+\newbox\mybox
+\newcount\laenge
+\newcount\laengehalbe
+\newcommand{\keys}[1]{%
+\setbox\mybox=\hbox{\footnotesize\textsf{#1}}%
+\laenge=\wd\mybox%
+\advance\laenge by 400000% entspricht 2.15 mm
+\laengehalbe=\laenge%
+\divide \laengehalbe by 2%
+\unitlength1sp\begin{picture}(\laenge,600000)(0, 140000)
+\put(\laengehalbe, 300000){\oval(\laenge, 600000)}%
+\put(200000, 140000){\unhbox\mybox}
+\end{picture}}
+
+% ------------------------------------------------ diverse Schriften und Zeichen
+\newcommand{\qq}[1]{"`#1"'}                    % ,,Gänsefüsschen''
+\newcommand{\qf}[1]{">#1"<}                    % >>Gänsefüsschen<<
+\newcommand{\keyinp}[1]{{\small\itshape #1}}   % Eingaben wie Dateiname
+\newcommand{\keycommand}[1]{{\small #1}}       % Kommandos wie goto-line
+\newcommand{\komm}[1]{{\ttfamily #1}}          % Unix-Kommandos, C-Befehle
+\newcommand{\dat}[1]{{\slshape{\ttfamily #1}}} % Datei- und Verzeichnisnamen
+\newcommand{\glos}[1]{{\bfseries #1}}          % Einträge im Glossar
+\newcommand{\ii}[1]{{\itshape #1}}             % für das Indexverzeichnis
+
+\renewcommand{\emph}[1]{{\slshape #1}}         % slanted statt emphasized
+
+\newcommand{\tild}{\textasciitilde}
+\newcommand{\zb}{z.\,B.\ }
+% \textmu                                      % mue wie in Mikrofarad
+% \textohm                                     % Omega
+
+% Text mit Ueberstrich (fuer Digitaltechnik, IC-Signale etc.)
+\newcommand{\textover}[1]{\ensuremath{\overline{\text{#1}}}}
+
+%% End ---------------------------------------------------------- 

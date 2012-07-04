@@ -1,0 +1,89 @@
+\section{\LaTeX Beispiele}\label{sec:bsp}
+
+\subsection{Aufzählung und Nummerierung}
+
+Zu den wichtigsten Aufgaben der Medium Access Control gehören:
+\begin{itemize}
+  \item Kanal-Scanning
+  \item PAN Association/Disassociation
+  \item 128-Bit-AES-Verschlüsselung
+\end{itemize}
+\begin{enumerate}
+  \item FFD führt ein aktives Kanal-Scanning durch
+  \item FFD wählt einen freien Kanal und eine freie LoWPAN-ID
+  \item Das FFD wird zum LoWPAN-Coordinator
+\end{enumerate}
+
+\subsection{Verweise}
+
+Verweis auf Abschnitt \ref{sec:bsp} \\
+Zitat der Quelle \cite{gk09}
+
+\subsection{Akronyme}
+Die \gls{bts} ist das passive Radio des GSM-Netzes \\
+und wir vom \gls{bsc} gesteuert.
+
+\subsection{Abbildung}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.85\textwidth]{img/hm.jpg}
+  \caption{Logo der Hochschule München}
+  \label{fig:HS}
+\end{figure}
+
+\subsection{Tabelle}
+
+\begin{table}[h!]
+  \centering  
+  \begin{tabular}{|p{3cm}||p{4cm}|p{4cm}|}
+    \hline \textbf{Parameter} & \textbf{6LoWPAN (CC2530)} & \textbf{BLE (CC
+2540)} \\ 
+    \hline
+    \hline Frequenzband & 2,4\,GHz ISM-Band & 2,4\,GHz ISM-Band \\
+    \hline Kanalzugriff & CSMA/CA & AFHSS \\
+    \hline Verbindungstyp & verbindungslos & verbindungsorientiert \\
+    \hline max. Stromaufnahme & \vspace{1pt}29\,mA & \vspace{1pt}24\,mA \\ 
+    \hline Energieverbrauch (Sendevorgang) & \vspace{1pt}407\,$\mu$Wh &
+\vspace{1pt}277\,$\mu$Wh \\ 
+    \hline Daten-übertragungsrate & \vspace{1pt}250\,kBit/s &
+\vspace{1pt}1\,MBit/s \\
+    \hline max. Anzahl Kommunikationsknoten & \vspace{1pt}$2^{64}-2$ &
+\vspace{1pt}$2^{32}-2$ \\
+    \hline Topologien & Stern; Peer-to-Peer & Stern \\
+    \hline Reichweite & ca. 100\,m & ca. 70\,m \\
+    \hline Implementierung & große Auswahl; IPv6 möglich & stark begrenzte
+Auswahl; IPv6 umständlich \\
+    \hline max. Payload pro Daten-Frame & \vspace{1pt}137\,Byte &
+\vspace{1pt}39\,Byte \\
+    \hline Stackgröße (Flash/RAM) & \vspace{0.5pt}32\,kByte/4\,kByte &
+\vspace{0.5pt}120\,kByte/ - \\
+    \hline Datensicherheit & 128-Bit-AES keine implementierten Funktionen &
+128-Bit-AES Security Manager \\
+    \hline
+  \end{tabular}
+  \caption{Parametervergleich 6LoWPAN vs. Bluetooth Low Energy}\label{tab:ver}
+\end{table}
+
+\subsection{Code-Listing}
+
+\begin{lstlisting}[caption="Beispiel Speicherallozierung",label=list:mal]
+ /* malloc1.c */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+   int *p;
+
+   p = malloc(sizeof(int));
+   if(p != NULL) {
+      *p=99;
+      printf("Allokationerfolgreich ... \n");
+   }
+   else {
+      printf("Kein virtueller RAM mehr verfügbar ...\n");
+      return EXIT_FAILURE;
+   }
+   return EXIT_SUCCESS;
+}
+\end{lstlisting}

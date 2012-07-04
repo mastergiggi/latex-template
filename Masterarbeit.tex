@@ -1,0 +1,28 @@
+%% Standard-Vorspann
+\documentclass[a4paper,11pt,oneside]{article}
+
+%% Spezielle config
+\usepackage{config}
+
+%% Index und Glossar erzeugen
+\makeindex
+\makeglossaries
+
+%% Akronyme
+\include{00Akronyme}
+
+%% Start
+\begin{document}
+\raggedbottom
+
+%% Titelblatt
+\include{01Titelblatt}
+
+%% Kapitel
+\include{98Beispiele}
+
+%% Anhang
+\include{99Anhang}
+
+\end{document}
+%% End
