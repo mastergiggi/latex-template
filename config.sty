@@ -1,40 +1,36 @@
-\ProvidesPackage{config}[2012/07/03]
+\ProvidesPackage{config}[2012/09/05]
 %% ---------------------------------------------------------------------------- 
 
-% fast immer benoetigte Pakete
-\usepackage[ngerman]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[fleqn]{amsmath}
-
-\usepackage{epsfig}
-\usepackage{amssymb}
-\usepackage{alltt}
-\usepackage{latexsym}
-\usepackage{makeidx}
-\usepackage{textcomp}
-\usepackage{rotating}
-\usepackage{color}
-\usepackage{caption}
-\usepackage{verbatim}
-\usepackage{fancyhdr}
-\usepackage[nonumberlist]{glossaries}
-
-% Auf Schriftart Palatino umschalten
-\usepackage{mathpazo}
-\usepackage[scaled=.95]{helvet}
-\usepackage{courier}
-
-% Hyperlinks
+% fast immer benötigte Pakete
 \usepackage[
   colorlinks=true,
   linkcolor=black,
   citecolor=black,
   urlcolor=black,
 ]{hyperref}
-
-% Listings
+\usepackage[ngerman]{babel}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage[nonumberlist]{glossaries}
+\usepackage{graphicx}
 \usepackage{listings}
+\usepackage[utf8]{inputenc}
+%\usepackage[fleqn]{amsmath}
+%\usepackage{amssymb}
+%\usepackage{alltt}
+%\usepackage{latexsym}
+%\usepackage{makeidx}
+%\usepackage{textcomp}
+%\usepackage{rotating}
+%\usepackage{color}
+%\usepackage{verbatim}
+
+% Auf Schriftart Palatino umschalten
+\usepackage{mathpazo}
+\usepackage[scaled=.95]{helvet}
+\usepackage{courier}
 
 % ------------------------------------------------- Allgemeine Formatanweisungen
 % Der Textanteil einer Seite. Der Default
@@ -45,6 +41,9 @@
 % einer Seite haben, um auf eine eigene leere Seite gesetzt zu 
 % werden. Der Default dafür ist $0.5$. Er wird hier auf $0.99$ gesetzt.
 \renewcommand{\floatpagefraction}{.99}
+
+% Seitenränder
+\geometry{a4paper, top=35mm, left=30mm, right=30mm, bottom=35mm}
 
 \setlength{\parskip}{4pt plus 4pt} % Einzug am Begin des Absatzes
 \parindent 0pt                     % verzichte auf Einrücken der ersten Zeile
@@ -140,16 +139,16 @@
 \renewcommand{\labelitemiv}{\textminus}
 
 % ----------------------------------------------------------------- Nummerierung
-% Abbildung: Kapitelnummer.Abbildungsnummer
-\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+% Abbildung: Kapitelnummer-Abbildungsnummer
+\renewcommand{\thefigure}{\arabic{section}-\arabic{figure}}
 \@addtoreset{figure}{section}
-% Tabelle: Kapitelnummer.Tabellennummer
-\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+% Tabelle: Kapitelnummer-Tabellennummer
+\renewcommand{\thetable}{\arabic{section}-\arabic{table}}
 \@addtoreset{table}{section}
-% Listing: Kpitelnummer.Listingnummer
+% Listing: Kpitelnummer-Listingnummer
 \makeatletter
 \AtBeginDocument{%
-\renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+\renewcommand*{\thelstlisting}{\arabic{section}-\arabic{lstlisting}}%
 \@addtoreset{lstlisting}{section}}
 \makeatother
 
@@ -166,15 +165,11 @@
 	showspaces=false,                  % Leerzeichen anzeigen ?
 	showtabs=false,                    % Tabs anzeigen ?
 	xleftmargin=17pt,
-	frame=b,                           % Begrenzung unten
-	showstringspaces=false             % Leerzeichen in Strings anzeigen ?
+	frame=tb,                          % Begrenzungen
+	showstringspaces=false,            % Leerzeichen in Strings anzeigen ?
+	captionpos=b			   % Position der Beschriftung
 }
 \lstloadlanguages{C}
-\DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35,
-0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white,
-singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
 
 % ---------------------------------------------------------------- Tastensymbole
 % Der Texte wird als Taste umrandet
@@ -201,13 +196,9 @@ singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
 \newcommand{\dat}[1]{{\slshape{\ttfamily #1}}} % Datei- und Verzeichnisnamen
 \newcommand{\glos}[1]{{\bfseries #1}}          % Einträge im Glossar
 \newcommand{\ii}[1]{{\itshape #1}}             % für das Indexverzeichnis
-
 \renewcommand{\emph}[1]{{\slshape #1}}         % slanted statt emphasized
-
 \newcommand{\tild}{\textasciitilde}
 \newcommand{\zb}{z.\,B.\ }
-% \textmu                                      % mue wie in Mikrofarad
-% \textohm                                     % Omega
 
 % Text mit Ueberstrich (fuer Digitaltechnik, IC-Signale etc.)
 \newcommand{\textover}[1]{\ensuremath{\overline{\text{#1}}}}
