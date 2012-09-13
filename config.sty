@@ -13,7 +13,7 @@
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
-\usepackage[nonumberlist]{glossaries}
+\usepackage[nonumberlist,toc]{glossaries}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
@@ -121,8 +121,8 @@
 % \clearpage bzw. \cleardoublepage
 % falls letzte Seite eines Kapitels leer ist 
 % (also gerade Seitennummer), keine Kopf- und Fußzeile
-\newcommand{\leereseite}{
-\hbox{} \ifodd \thepage {\newpage\thispagestyle{empty}} \fi}
+%\newcommand{\leereseite}{
+%\hbox{} \ifodd \thepage {\newpage\thispagestyle{empty}} \fi}
 
 % ------------------------------------------------------- Aufzählung mit bullets
 % neue Definition fuer Listenumgebungen

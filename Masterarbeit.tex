@@ -1,11 +1,11 @@
 %% Standard-Vorspann
-\documentclass[a4paper,11pt,oneside,listof=totoc,bibliography=totoc]{article}
+\documentclass[a4paper,11pt,oneside,listof=totoc,bibliography=totoc]{scrartcl}
 
 %% Spezielle config
+%\usepackage{scrhack}
 \usepackage{config}
 
-%% Index und Glossar erzeugen
-\makeindex
+%% Glossar erzeugen
 \makeglossaries
 
 %% Akronyme
@@ -14,10 +14,12 @@
 %% Start
 \begin{document}
 \raggedbottom
+\pagenumbering{roman}
 
 %% Titelblatt
 \include{01Titelblatt}
 
+\pagenumbering{arabic}
 %% Kapitel
 \include{98Beispiele}
 
