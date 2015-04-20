@@ -17,6 +17,8 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage{multicol}
 %\usepackage[fleqn]{amsmath}
 %\usepackage{amssymb}
 %\usepackage{alltt}
@@ -43,7 +45,7 @@
 \renewcommand{\floatpagefraction}{.99}
 
 % Seitenränder
-\geometry{a4paper, top=35mm, left=30mm, right=30mm, bottom=35mm}
+\geometry{a4paper, top=35mm, left=30mm, right=30mm, bottom=30mm}
 
 \setlength{\parskip}{4pt plus 4pt} % Einzug am Begin des Absatzes
 \parindent 0pt                     % verzichte auf Einrücken der ersten Zeile
@@ -57,8 +59,12 @@
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markboth{\thesection\quad #1}{}}
 \fancyhf{}
+% oneside
 \fancyhead[RO]{\thepage}
 \fancyhead[LO]{\nouppercase \leftmark}
+% twoside
+%\fancyhead[LO,RE]{\thepage}
+%\fancyhead[LE,RO]{\nouppercase \leftmark}
 \fancyfoot{}
 \fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}  
 
@@ -154,22 +160,26 @@
 
 % --------------------------------------------------------------------- Listings
 \lstset{
-	basicstyle=\footnotesize\ttfamily, % Standardschrift
+	basicstyle=\footnotesize\ttfamily, %\footnotesize Standardschrift
 	numbers=left,                      % Ort der Zeilennummern
 	numberstyle=\tiny,                 % Stil der Zeilennummern
 	numbersep=5pt,                     % Abstand der Nummern zum Text
-	tabsize=2,                         % Groesse von Tabs
+	tabsize=3,                         % Groesse von Tabs
 	extendedchars=true,
 	breaklines=true,                   % Zeilen werden Umgebrochen
 	stringstyle=\ttfamily,             % Farbe der String
 	showspaces=false,                  % Leerzeichen anzeigen ?
 	showtabs=false,                    % Tabs anzeigen ?
 	xleftmargin=17pt,
-	frame=tb,                          % Begrenzungen
+	frame=tblr,                          % Begrenzungen
 	showstringspaces=false,            % Leerzeichen in Strings anzeigen ?
 	captionpos=b			   % Position der Beschriftung
 }
 \lstloadlanguages{C}
+
+\makeatletter
+\lst@AddToHook{TextStyle}{\let\lst@basicstyle\normalsize\ttfamily}
+\makeatother
 
 % ---------------------------------------------------------------- Tastensymbole
 % Der Texte wird als Taste umrandet
@@ -202,5 +212,15 @@
 
 % Text mit Ueberstrich (fuer Digitaltechnik, IC-Signale etc.)
 \newcommand{\textover}[1]{\ensuremath{\overline{\text{#1}}}}
+
+% Umbruch von URLs im Literaturverzeichnis
+\makeatletter
+\g@addto@macro\UrlBreaks{
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j
+  \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t
+  \do\u\do\v\do\w\do\x\do\y\do\z\do\&\do\1\do\2\do\3
+  \do\4\do\5\do\6\do\7\do\8\do\9\do\0}
+% \def\do@url@hyp{\do\-}
+\makeatother 
 
 %% End ---------------------------------------------------------- 

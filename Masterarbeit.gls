@@ -1,5 +1,0 @@
-\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
-\begin{theglossary}\glossaryheader
-\glossaryentryfield{bsc}{\glsnamefont{BSC}}{Base Station Controller}{\relax }
-\glossaryentryfield{bts}{\glsnamefont{BTS}}{Base Transceiver Station}{\relax }
-\end{theglossary}\glossarypostamble

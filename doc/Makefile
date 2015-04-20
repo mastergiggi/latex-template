@@ -12,6 +12,7 @@ clean:
 	-type f \( \
 	-name "*.aux" \
 	-o -name "*.aux" \
+	-o -name "*.backup" \
 	-o -name "*.glo" \
 	-o -name "*.ilg" \
 	-o -name "*.ind" \
